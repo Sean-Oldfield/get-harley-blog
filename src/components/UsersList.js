@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import blog from '../apis/blog';
 import { Link } from 'react-router-dom';
+import Skeleton from 'react-loading-skeleton';
 
 const UsersList = () => {
 
@@ -42,7 +43,12 @@ const UsersList = () => {
     }
 
     if(loading) {
-        return <h1>Loading...</h1>;
+        return (
+            <div>
+                <h1>Users</h1>
+                <Skeleton height={40} count={10}/>
+            </div>
+        );
     }
     return (
         <div>

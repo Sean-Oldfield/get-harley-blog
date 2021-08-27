@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import blog from '../apis/blog';
 import { Link } from 'react-router-dom';
+import Skeleton from 'react-loading-skeleton';
 
 const Post = ({id, post}) => {
 
@@ -58,7 +59,11 @@ const Post = ({id, post}) => {
     }
 
     if (loading) {
-        return <h1>Loading...</h1>;
+        return (
+            <div>
+                <Skeleton height={30}/>
+            </div>
+        );
     }
     return (
         <div className="item" key={post.id}>

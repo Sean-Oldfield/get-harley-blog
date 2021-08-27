@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import blog from '../apis/blog';
 import PostList from './PostList';
+import Skeleton from 'react-loading-skeleton';
 
 const TagPosts = props => {
 
@@ -20,7 +21,12 @@ const TagPosts = props => {
 
 
     if (loading) {
-        return <h1>Loading...</h1>
+        return (
+            <div>
+                <h1>Tag Name</h1>
+                <Skeleton height={40} count={10}/>
+            </div>
+        );
     }
     return (
         <div>
