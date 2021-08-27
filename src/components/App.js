@@ -4,6 +4,7 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import UsersList from './UsersList';
 import UserProfile from './UserProfile';
 import UserPosts from './UserPosts';
+import TagPosts from './TagPosts';
 
 const App = () => {
     return (
@@ -12,6 +13,7 @@ const App = () => {
                 <Route path="/" exact component={UsersList} />
                 <Route path="/users/show/:id" exact component={UserProfile} />
                 <Route path="/users/:userId/posts" exact component={UserPosts} />
+                <Route path="/posts/:tag" exact component={TagPosts} />
             </BrowserRouter>
         </div>
     );

@@ -2,31 +2,32 @@ import React, { useState, useEffect } from 'react';
 import blog from '../apis/blog';
 import PostList from './PostList';
 
-const UserPosts = props => {
+const TagPosts = props => {
 
-    const userId = props.match.params.userId;
+    const tag = props.match.params.tag;
     const [posts, setPosts] = useState([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const fetchPosts = async () => {
+        const fetchTagPosts = async () => {
             setLoading(true);
-            const res = await blog.get(`user/${userId}/post`);
+            const res = await blog.get(`tag/${tag}/post`);
             setPosts(res.data.data);
             setLoading(false);
         }
-        fetchPosts();
+        fetchTagPosts();
     }, []);
+
 
     if (loading) {
         return <h1>Loading...</h1>
     }
     return (
         <div>
-            <h1>User Name</h1>
+            <h1>{tag}</h1>
             <PostList posts={posts} />
         </div>
     );
 }
 
-export default UserPosts;
+export default TagPosts;
