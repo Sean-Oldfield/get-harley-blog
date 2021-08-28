@@ -12,7 +12,7 @@ const PostList = ({ posts }) => {
     }
 
     return (
-        <div className="ui celled list">
+        <div className="ui large middle aligned divided list">
             {renderList()}
         </div>
     );

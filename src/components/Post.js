@@ -1,73 +1,53 @@
-import React, { useEffect, useState } from 'react';
-import blog from '../apis/blog';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import Skeleton from 'react-loading-skeleton';
+import './styles/Post.css';
 
-const Post = ({id, post}) => {
-
-    const [comments, setComments] = useState([]);
-    const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-        const fetchComments = async () => {
-            setLoading(true);
-            const res = await blog.get(`post/${id}/comment`, {
-                params: {
-                    limit: '2'
-                }
-            });
-            setComments(res.data.data);
-            setLoading(false);
-        }
-        fetchComments();
-    }, []);
+const Post = ({ post }) => {
 
     const renderTags = () => {
         return post.tags.map(tag => {
             return (
-                <div className="right floated content" key={tag}>
-                    <Link to={`/posts/${tag}`} className="ui button">
+                <Link to={`/posts/${tag}`} className="ui button" key={tag}>
                     <i className="tag icon"></i>
                     {tag}
-                    </Link>
-                </div>
+                </Link>
             );
         });
     } 
 
     const renderComments = () => {
-        if (comments.length > 0) {
-            return comments.map(comment => {
-                return (
-                    <div className="comment" key={comment.id}>
-                        <a className="avatar">
-                            <img alt="avatar" src={comment.owner.picture} />
-                        </a>
-                        <div className="content">
-                            <a className="author">{comment.owner.firstName} {comment.owner.lastName}</a>
-                            <div className="metadata">
-                                <span className="date">{comment.publishDate}</span>
+        let commentsRendered = 0;
+        if (post.comments.length > 0) {
+            return post.comments.map(comment => {
+                if (commentsRendered < 2) {
+                    commentsRendered++;
+                    return (
+                        <div className="comment" key={comment.id}>
+                            <a className="avatar">
+                                <img alt="avatar" src={comment.owner.picture} />
+                            </a>
+                            <div className="content">
+                                <a className="author">{comment.owner.firstName} {comment.owner.lastName}</a>
+                                <div className="metadata">
+                                    <span className="date">{comment.publishDate}</span>
+                                </div>
+                                <div className="text">
+                                    {comment.message}
+                                </div>
                             </div>
-                            <div className="text">
-                                {comment.message}
-                            </div>
-                        </div>
-                    </div>  
-                );
+                        </div>  
+                    );
+                }
             });
         }
     }
 
-    if (loading) {
-        return (
-            <div>
-                <Skeleton height={30}/>
-            </div>
-        );
-    }
     return (
-        <div className="item" key={post.id}>
-            {renderTags()}
+        <div className="item ui list-item" key={post.id}>
+            <div className="right floated content action-buttons">
+                {renderTags()}
+            </div>
             <img alt="avatar" className="ui avatar image" src={post.image} />
             <div className="content">
                 <div className="header">
@@ -79,8 +59,8 @@ const Post = ({id, post}) => {
                     </Link>
                 </div>
             </div>
-            {comments.length > 0 ? <div className="ui minimal comments">
-                <h3 className="ui dividing header">Comments</h3>
+            {post.comments.length > 0 ? <div className="ui minimal comments">
+                <h3 className="ui dividing header">{post.comments.length} Comment(s)</h3>
             {renderComments()}
             </div> : null}
         </div> 
