@@ -10,6 +10,7 @@ const Post = ({ post, setTag }) => {
                     onClick={() => setTag(tag)} to={`/posts/${tag}`} 
                     className="ui label small"
                     key={tag}
+                    style={{margin:'0 6px 6px 0'}}
                 >
                     <i className="tag icon"></i>
                     {tag}
@@ -30,10 +31,7 @@ const Post = ({ post, setTag }) => {
                                 <img alt="avatar" src={comment.owner.picture} />
                             </a>
                             <div className="content">
-                                <a className="author">{comment.owner.firstName} {comment.owner.lastName}</a>
-                                <div className="metadata">
-                                    <span className="date">Change</span>
-                                </div>
+                                <span className="author">{comment.owner.firstName} {comment.owner.lastName}</span>
                                 <div className="text">
                                     {comment.message}
                                 </div>
@@ -48,7 +46,7 @@ const Post = ({ post, setTag }) => {
     return (
         <div className="ui raised card" key={post.id}>
             <div className="content">
-                <div className="right floated meta">Change</div>
+                <div className="right floated meta">{new Date(post.publishDate).toLocaleDateString()}</div>
                 <Link to={`/users/show/${post.owner.id}`}>
                     <img alt="user avatar" className="ui avatar image" src={post.owner.picture} /> {post.owner.firstName}
                 </Link>
@@ -58,7 +56,7 @@ const Post = ({ post, setTag }) => {
             </div>
             <div className="content">
                 {renderTags()}
-                <div className="description">
+                <div className="description" style={{marginTop: '10px', marginBottom: '14px'}}>
                     {post.text}
                 </div>
                 <span className="right floated">

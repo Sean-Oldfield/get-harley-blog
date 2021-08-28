@@ -37,13 +37,21 @@ const TagPosts = props => {
         setCurrentPage(pageNumber);
     }
 
+    const formatTagName = tag => {
+        return tag[0].toUpperCase() + tag.substring(1)
+    }
 
     if (loading) {
         return <PostListLoading />;
     }
     return (
         <div>
-            <h1>{tag}</h1>
+            <h1 class="ui header" style={{ marginBottom: '30px'}}>
+                <i class="tag icon"></i>
+                <div class="content">
+                    {formatTagName(tag)}
+                </div>
+            </h1>
             <PostList posts={currentPosts} setTag={setTag} />
             <Pagination itemsPerPage={postsPerPage} totalItems={posts.length} paginate={paginate} />
         </div>

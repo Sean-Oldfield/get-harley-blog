@@ -12,17 +12,21 @@ const Pagination = ({ itemsPerPage, totalItems, paginate }) => {
 
     return (
         <div className="pagination">
+            <div className="spacer">
+            </div>
             <ul className="pagination-list">
                 {pageNumbers.map(number => {
                     return (
                         <li onClick={() => paginate(number)} key={number} className="pagination-list-item">
-                            <button className="circular ui icon button">
+                            <button className="circular ui icon button pagination-button">
                                 {number}   
                             </button>
                         </li>
                     );
                 })}
             </ul>
+            <div className="spacer">
+            </div>
         </div>
     );
 }

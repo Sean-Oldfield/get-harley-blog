@@ -18,7 +18,7 @@ const UserPosts = props => {
     useEffect(() => {
         const fetchPosts = async () => {
             setLoading(true);
-            const res = await blog.get(`user/${userId}/post`, { params: { limit: '30' } });
+            const res = await blog.get(`user/${userId}/post`);
             const tempPosts = res.data.data;
             for (let i=0; i<tempPosts.length; i++) {
                 const res2 = await blog.get(`post/${tempPosts[i].id}/comment`);
@@ -45,7 +45,12 @@ const UserPosts = props => {
     }
     return (
         <div>
-            <h1>{user.firstName} {user.lastName}</h1>
+            <h1 class="ui header" style={{ marginBottom: '30px'}}>
+                <i class="camera retro icon"></i>
+                <div class="content">
+                    {user.firstName} {user.lastName}
+                </div>
+            </h1>
             <PostList posts={currentPosts} setTag={setTag} />
             <Pagination itemsPerPage={postsPerPage} totalItems={posts.length} paginate={paginate} />
         </div>

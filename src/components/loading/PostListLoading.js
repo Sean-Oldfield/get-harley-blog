@@ -46,7 +46,11 @@ const PostListLoading = () => {
     
     return (
         <div>
-            <h1>Posts</h1>
+            <h1 class="ui header" style={{ marginBottom: '30px'}}>
+                <div class="content">
+                    Loading Posts...
+                </div>
+            </h1>
             <div className="ui four stackable cards">
                 {renderCards()}
             </div>

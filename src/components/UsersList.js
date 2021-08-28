@@ -15,7 +15,7 @@ const UsersList = () => {
     useEffect(() => {
         const fetchUsers = async () => {
             setLoading(true);
-            const res = await blog.get('user', { params: { limit: '12' } });
+            const res = await blog.get('user', { params: { limit: '20' } });
             const tempUsers = res.data.data;
             for (let i=0; i<tempUsers.length; i++) {
                 const res2 = await blog.get(`user/${tempUsers[i].id}/post`);
@@ -49,12 +49,12 @@ const UsersList = () => {
                             <span className="date">{user.postCount} posts created.</span>
                         </div>
                     </div>
-                    <div className="extra content">
-                        <Link to={`/users/show/${user.id}`} className="ui button">
+                    <div className="extra content" style={{ display: 'flex', justifyContent: 'space-evenly' }}>
+                        <Link to={`/users/show/${user.id}`} className="ui button" style={{margin: '0'}}>
                             <i className="user circle icon"></i> Profile
                         </Link>
-                        <Link to={`/users/${user.id}/posts`} className="ui button primary">
-                            <i className="newspaper icon"></i> Posts
+                        <Link to={`/users/${user.id}/posts`} className="ui button black" style={{margin: '0'}}>
+                            <i class="camera retro icon"></i> Posts
                         </Link>
                     </div>
                 </div>
@@ -67,7 +67,12 @@ const UsersList = () => {
     }
     return (
         <div>
-            <h1>Users</h1>
+            <h1 class="ui header" style={{ marginBottom: '30px'}}>
+                <i class="users icon"></i>
+                <div class="content">
+                    Users
+                </div>
+            </h1>
             <div className="ui four stackable cards">
                 {renderList()}
             </div>

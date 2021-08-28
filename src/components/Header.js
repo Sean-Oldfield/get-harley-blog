@@ -3,17 +3,14 @@ import { Link } from 'react-router-dom';
 
 const Header = () => {
     return (
-        <div className="ui secondary pointing menu">
+        <div className="ui secondary pointing menu" style={{ marginBottom: '30px' }}>
             <Link to="/" className="active item">
-                Blog App
+                GetHarley Blog
             </Link>
             <div className="right menu">
-                <Link to="/" className="ui item">
-                    Users
-                </Link>
-                <a className="ui item">
-                    Tags
-                </a>
+                <span className="ui item" style={{ fontStyle: 'italic' }}>
+                    Powered By Experts
+                </span>
             </div>
         </div>
     );

@@ -29,17 +29,17 @@ const UserProfile = props => {
             <div className="content">
                 <a className="header">{user.firstName} {user.lastName}</a>
                 <div className="meta">
-                <span className="date">Joined CHNGE</span>
+                <span className="date">Joined {new Date(user.registerDate).toLocaleDateString()}</span>
                 </div>
                 <div className="description">
                 {user.location.city}, {user.location.country}
                 </div>
             </div>
             <div className="extra content">
-                <div className="ui label">
+                <div style={{margin:'0 6px 6px 0'}} className="ui label">
                     <i className="mail icon"></i> {user.email}
                 </div>
-                <div className="ui label">
+                <div style={{margin:'0 6px 6px 0'}} className="ui label">
                     <i className="phone icon"></i> {user.phone}
                 </div>
             </div>

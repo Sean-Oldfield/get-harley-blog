@@ -24,9 +24,9 @@ const UsersListLoading = () => {
                             </div>
                         </div>
                     </div>
-                    <div class="extra content">
-                        <div class="ui disabled button"><i className="user circle icon"></i> Profile</div>
-                        <div class="ui disabled primary button"><i className="newspaper icon"></i> Posts</div>
+                    <div class="extra content" style={{ display: 'flex', justifyContent: 'space-evenly' }}>
+                        <div class="ui disabled button" style={{margin: '0'}}><i className="user circle icon"></i> Profile</div>
+                        <div class="ui disabled black button" style={{margin: '0'}}><i class="camera retro icon"></i> Posts</div>
                     </div>
                 </div>
             );
@@ -34,7 +34,12 @@ const UsersListLoading = () => {
     }
     return (
         <div>
-            <h1>Users</h1>
+            <h1 class="ui header" style={{ marginBottom: '30px'}}>
+                <i class="users icon"></i>
+                <div class="content">
+                    Users
+                </div>
+            </h1>
             <div className="ui four stackable cards">
                 {renderCards()}
             </div>
