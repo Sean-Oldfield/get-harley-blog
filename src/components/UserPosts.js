@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from 'react';
+
 import blog from '../apis/blog';
 import PostList from './PostList';
-import Skeleton from 'react-loading-skeleton';
 import Pagination from './Pagination';
+import PostListLoading from './loading/PostListLoading';
 
 const UserPosts = props => {
 
     const userId = props.match.params.userId;
+    const [tag, setTag] = useState(null);
     const [user, setUser] = useState(null);
     const [posts, setPosts] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
-    const [postsPerPage, setPostsPerPage] = useState(5);
+    const [postsPerPage, setPostsPerPage] = useState(8);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -39,17 +41,12 @@ const UserPosts = props => {
     }
 
     if (loading) {
-        return (
-            <div>
-                <h1>User Name</h1>
-                <Skeleton height={40} count={10}/>
-            </div>
-        );
+        return <PostListLoading />;
     }
     return (
         <div>
             <h1>{user.firstName} {user.lastName}</h1>
-            <PostList posts={currentPosts} />
+            <PostList posts={currentPosts} setTag={setTag} />
             <Pagination itemsPerPage={postsPerPage} totalItems={posts.length} paginate={paginate} />
         </div>
     );

@@ -1,11 +1,11 @@
 import React from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 
+import Header from './Header';
 import UsersList from './UsersList';
 import UserProfile from './UserProfile';
 import UserPosts from './UserPosts';
 import TagPosts from './TagPosts';
-import Header from './Header';
 
 const App = () => {
     return (

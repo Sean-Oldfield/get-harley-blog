@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from 'react';
+
 import blog from '../apis/blog';
 import PostList from './PostList';
-import Skeleton from 'react-loading-skeleton';
 import Pagination from './Pagination';
+import PostListLoading from './loading/PostListLoading';
 
 const TagPosts = props => {
 
-    const tag = props.match.params.tag;
+    const [tag, setTag] = useState(props.match.params.tag);
     const [posts, setPosts] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
-    const [postsPerPage, setPostsPerPage] = useState(5);
+    const [postsPerPage] = useState(8);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -25,7 +26,7 @@ const TagPosts = props => {
             setLoading(false);
         }
         fetchTagPosts();
-    }, []);
+    }, [tag]);
 
     const indexOfLastPost = currentPage * postsPerPage;
     const indexOfFirstPost = indexOfLastPost - postsPerPage;
@@ -38,17 +39,12 @@ const TagPosts = props => {
 
 
     if (loading) {
-        return (
-            <div>
-                <h1>Tag Name</h1>
-                <Skeleton height={40} count={10}/>
-            </div>
-        );
+        return <PostListLoading />;
     }
     return (
         <div>
             <h1>{tag}</h1>
-            <PostList posts={currentPosts} />
+            <PostList posts={currentPosts} setTag={setTag} />
             <Pagination itemsPerPage={postsPerPage} totalItems={posts.length} paginate={paginate} />
         </div>
     );

@@ -1,14 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Skeleton from 'react-loading-skeleton';
-import './styles/Post.css';
 
-const Post = ({ post }) => {
+const Post = ({ post, setTag }) => {
 
     const renderTags = () => {
         return post.tags.map(tag => {
             return (
-                <Link to={`/posts/${tag}`} className="ui button" key={tag}>
+                <Link 
+                    onClick={() => setTag(tag)} to={`/posts/${tag}`} 
+                    className="ui label small"
+                    key={tag}
+                >
                     <i className="tag icon"></i>
                     {tag}
                 </Link>
@@ -30,7 +32,7 @@ const Post = ({ post }) => {
                             <div className="content">
                                 <a className="author">{comment.owner.firstName} {comment.owner.lastName}</a>
                                 <div className="metadata">
-                                    <span className="date">{comment.publishDate}</span>
+                                    <span className="date">Change</span>
                                 </div>
                                 <div className="text">
                                     {comment.message}
@@ -44,26 +46,30 @@ const Post = ({ post }) => {
     }
 
     return (
-        <div className="item ui list-item" key={post.id}>
-            <div className="right floated content action-buttons">
-                {renderTags()}
-            </div>
-            <img alt="avatar" className="ui avatar image" src={post.image} />
+        <div className="ui raised card" key={post.id}>
             <div className="content">
-                <div className="header">
+                <div className="right floated meta">Change</div>
+                <Link to={`/users/show/${post.owner.id}`}>
+                    <img alt="user avatar" className="ui avatar image" src={post.owner.picture} /> {post.owner.firstName}
+                </Link>
+            </div>
+            <div className="image">
+                <img alt="post image" src={post.image} />
+            </div>
+            <div className="content">
+                {renderTags()}
+                <div className="description">
                     {post.text}
                 </div>
-                <div className="description">
-                    <Link to={`/users/show/${post.owner.id}`}>
-                        Created By {post.owner.firstName } {post.owner.lastName }
-                    </Link>
-                </div>
+                <span className="right floated">
+                <i className="heart outline like icon"></i> {post.likes}
+                </span>
+                <i className="comment icon"></i> {post.comments.length}
             </div>
-            {post.comments.length > 0 ? <div className="ui minimal comments">
-                <h3 className="ui dividing header">{post.comments.length} Comment(s)</h3>
-            {renderComments()}
-            </div> : null}
-        </div> 
+                {post.comments.length > 0 ? <div className="extra content"><div className="ui minimal comments">
+                    {renderComments()}
+                </div></div>: null}     
+        </div>
     );
 }
 

@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import blog from '../apis/blog';
 import { Link } from 'react-router-dom';
-import Skeleton from 'react-loading-skeleton';
-import './styles/UsersList.css';
+
+import blog from '../apis/blog';
+import UsersListLoading from './loading/UsersListLoading';
 import Pagination from './Pagination';
 
 const UsersList = () => {
 
     const [users, setUsers] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
-    const [usersPerPage, setUsersPerPage] = useState(10);
+    const [usersPerPage] = useState(8);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -39,23 +39,23 @@ const UsersList = () => {
     const renderList = () => {
         return currentUsers.map(user => {
             return (
-                <div className="item list-item" key={user.id}>
-                    <div className="right floated content action-buttons">
-                        <Link to={`users/show/${user.id}`} className="ui button primary">
-                            <i className="user circle icon"></i>
-                            Profile
-                        </Link>
-                        <Link to={`users/${user.id}/posts`} className="ui button">
-                            <i className="newspaper icon"></i>
-                            Posts
-                        </Link>
+                <div className="ui raised card" key={user.id}>
+                    <div className="image">
+                        <img src={user.picture} />
                     </div>
-                    <img alt="avatar" className="ui avatar image" src={user.picture} />
                     <div className="content">
-                        <Link to={`users/show/${user.id}`} className="header">{user.firstName} {user.lastName}</Link>
-                        <div className="description">
-                            {user.postCount} posts created.
+                        <Link to={`/users/show/${user.id}`} className="header">{user.firstName} {user.lastName}</Link>
+                        <div className="meta">
+                            <span className="date">{user.postCount} posts created.</span>
                         </div>
+                    </div>
+                    <div className="extra content">
+                        <Link to={`/users/show/${user.id}`} className="ui button">
+                            <i className="user circle icon"></i> Profile
+                        </Link>
+                        <Link to={`/users/${user.id}/posts`} className="ui button primary">
+                            <i className="newspaper icon"></i> Posts
+                        </Link>
                     </div>
                 </div>
             );
@@ -63,17 +63,12 @@ const UsersList = () => {
     }
 
     if(loading) {
-        return (
-            <div>
-                <h1>Users</h1>
-                <Skeleton height={40} count={10}/>
-            </div>
-        );
+        return <UsersListLoading />;
     }
     return (
         <div>
             <h1>Users</h1>
-            <div className="ui large middle aligned divided list">
+            <div className="ui four stackable cards">
                 {renderList()}
             </div>
             <Pagination itemsPerPage={usersPerPage} totalItems={users.length} paginate={paginate} />
