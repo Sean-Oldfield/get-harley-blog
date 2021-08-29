@@ -12,7 +12,7 @@ const UserPosts = props => {
     const [user, setUser] = useState(null);
     const [posts, setPosts] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
-    const [postsPerPage, setPostsPerPage] = useState(8);
+    const [postsPerPage] = useState(8);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {

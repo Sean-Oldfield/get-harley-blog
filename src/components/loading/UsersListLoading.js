@@ -1,32 +1,31 @@
 import React from 'react';
 
-
 const UsersListLoading = () => {
 
     const renderCards = () => {
         const arr = [1, 2, 3, 4];
         return arr.map(item => {
             return (
-                <div class="ui raised card">
-                    <div class="image">
-                        <div class="ui placeholder">
-                            <div class="square image"></div>
+                <div className="ui raised card" key={item}>
+                    <div className="image">
+                        <div className="ui placeholder">
+                            <div className="square image"></div>
                         </div>
                     </div>
-                    <div class="content">
-                        <div class="ui placeholder">
-                            <div class="header">
-                            <div class="very short line"></div>
-                            <div class="medium line"></div>
+                    <div className="content">
+                        <div className="ui placeholder">
+                            <div className="header">
+                            <div className="very short line"></div>
+                            <div className="medium line"></div>
                             </div>
-                            <div class="paragraph">
-                            <div class="short line"></div>
+                            <div className="paragraph">
+                            <div className="short line"></div>
                             </div>
                         </div>
                     </div>
-                    <div class="extra content" style={{ display: 'flex', justifyContent: 'space-evenly' }}>
-                        <div class="ui disabled button" style={{margin: '0'}}><i className="user circle icon"></i> Profile</div>
-                        <div class="ui disabled black button" style={{margin: '0'}}><i class="camera retro icon"></i> Posts</div>
+                    <div className="extra content" style={{ display: 'flex', justifyContent: 'space-evenly' }}>
+                        <div className="ui disabled button" style={{margin: '0'}}><i className="user circle icon"></i> Profile</div>
+                        <div className="ui disabled black button" style={{margin: '0'}}><i className="camera retro icon"></i> Posts</div>
                     </div>
                 </div>
             );
@@ -34,13 +33,13 @@ const UsersListLoading = () => {
     }
     return (
         <div>
-            <h1 class="ui header" style={{ marginBottom: '30px'}}>
-                <i class="users icon"></i>
-                <div class="content">
+            <h1 className="ui header" style={{ marginBottom: '30px'}}>
+                <i className="users icon"></i>
+                <div className="content">
                     Users
                 </div>
             </h1>
-            <div className="ui four stackable cards">
+            <div className="ui three stackable cards">
                 {renderCards()}
             </div>
         </div>

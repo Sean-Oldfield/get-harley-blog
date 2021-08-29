@@ -1,27 +1,23 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 
 import blog from '../apis/blog';
 import UsersListLoading from './loading/UsersListLoading';
 import Pagination from './Pagination';
+import UsersListItem from './UsersListItem';
 
 const UsersList = () => {
 
     const [users, setUsers] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
-    const [usersPerPage] = useState(8);
+    const [usersPerPage] = useState(6);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchUsers = async () => {
             setLoading(true);
             const res = await blog.get('user', { params: { limit: '20' } });
-            const tempUsers = res.data.data;
-            for (let i=0; i<tempUsers.length; i++) {
-                const res2 = await blog.get(`user/${tempUsers[i].id}/post`);
-                tempUsers[i]["postCount"] = res2.data.data.length;
-            }
-            setUsers(tempUsers);
+            const users = res.data.data;
+            setUsers(users);
             setLoading(false);
         }
         fetchUsers();
@@ -30,7 +26,7 @@ const UsersList = () => {
     const indexOfLastUser = currentPage * usersPerPage;
     const indexOfFirstUser = indexOfLastUser - usersPerPage;
     const currentUsers = users.slice(indexOfFirstUser, indexOfLastUser);
-
+    
     // Change Page
     const paginate = pageNumber => {
         setCurrentPage(pageNumber);
@@ -39,25 +35,7 @@ const UsersList = () => {
     const renderList = () => {
         return currentUsers.map(user => {
             return (
-                <div className="ui raised card" key={user.id}>
-                    <div className="image">
-                        <img src={user.picture} />
-                    </div>
-                    <div className="content">
-                        <Link to={`/users/show/${user.id}`} className="header">{user.firstName} {user.lastName}</Link>
-                        <div className="meta">
-                            <span className="date">{user.postCount} posts created.</span>
-                        </div>
-                    </div>
-                    <div className="extra content" style={{ display: 'flex', justifyContent: 'space-evenly' }}>
-                        <Link to={`/users/show/${user.id}`} className="ui button" style={{margin: '0'}}>
-                            <i className="user circle icon"></i> Profile
-                        </Link>
-                        <Link to={`/users/${user.id}/posts`} className="ui button black" style={{margin: '0'}}>
-                            <i class="camera retro icon"></i> Posts
-                        </Link>
-                    </div>
-                </div>
+                <UsersListItem user={user} key={user.id} />
             );
         });
     }
@@ -67,13 +45,13 @@ const UsersList = () => {
     }
     return (
         <div>
-            <h1 class="ui header" style={{ marginBottom: '30px'}}>
-                <i class="users icon"></i>
-                <div class="content">
+            <h1 className="ui header" style={{ marginBottom: '30px'}}>
+                <i className="users icon"></i>
+                <div className="content">
                     Users
                 </div>
             </h1>
-            <div className="ui four stackable cards">
+            <div className="ui three stackable cards">
                 {renderList()}
             </div>
             <Pagination itemsPerPage={usersPerPage} totalItems={users.length} paginate={paginate} />

@@ -27,9 +27,9 @@ const Post = ({ post, setTag }) => {
                     commentsRendered++;
                     return (
                         <div className="comment" key={comment.id}>
-                            <a className="avatar">
-                                <img alt="avatar" src={comment.owner.picture} />
-                            </a>
+                            <div className="avatar">
+                                <img alt="" src={comment.owner.picture} />
+                            </div>
                             <div className="content">
                                 <span className="author">{comment.owner.firstName} {comment.owner.lastName}</span>
                                 <div className="text">
@@ -38,6 +38,8 @@ const Post = ({ post, setTag }) => {
                             </div>
                         </div>  
                     );
+                } else {
+                    return;
                 }
             });
         }
@@ -48,11 +50,11 @@ const Post = ({ post, setTag }) => {
             <div className="content">
                 <div className="right floated meta">{new Date(post.publishDate).toLocaleDateString()}</div>
                 <Link to={`/users/show/${post.owner.id}`}>
-                    <img alt="user avatar" className="ui avatar image" src={post.owner.picture} /> {post.owner.firstName}
-                </Link>
+                    <img alt="" className="ui avatar image" src={post.owner.picture} /> {post.owner.firstName}
+                </Link> 
             </div>
             <div className="image">
-                <img alt="post image" src={post.image} />
+                <img alt={post.text} src={post.image} />
             </div>
             <div className="content">
                 {renderTags()}
