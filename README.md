@@ -1,6 +1,13 @@
 # Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This app was created in React and bootstrapped using [Create React App](https://github.com/facebook/create-react-app).
+
+The app includes all of the pages and features outlined in the project requirements.
+
+With more time to work on the app, I would've:
+- Added more automated testing to ensure components render correctly.
+- Added error states to deal with situations where an API request responds with an error. 
+- Improved general styling, particularly of the UserProfile and Pagination components.
 
 ## Available Scripts
 
