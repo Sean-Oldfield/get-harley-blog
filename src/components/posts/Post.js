@@ -40,11 +40,11 @@ const Post = ({ post, setTag }) => {
         <div className="ui raised card" key={post.id}>
             <div className="content">
                 <div className="right floated meta">{new Date(post.publishDate).toLocaleDateString()}</div>
-                <Link to={`/users/show/${post.owner.id}`}>
+                <Link to={`/users/show/${post.owner.id}`} className="post-owner">
                     <img alt="" className="ui avatar image" src={post.owner.picture} /> {post.owner.firstName}
                 </Link> 
             </div>
-            <div className="image">
+            <div className="image post-image">
                 <img alt={post.text} src={post.image} />
             </div>
             <div className="content">
