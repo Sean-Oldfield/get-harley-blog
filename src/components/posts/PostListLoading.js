@@ -6,32 +6,32 @@ const PostListLoading = () => {
         const arr = [1, 2, 3, 4];
         return arr.map(item => {
             return (
-                <div class="ui raised card">
+                <div className="ui raised card" key={item}>
                     <div className="content">
-                        <div class="ui placeholder">
-                            <div class="image header">
-                                <div class="line"></div>
-                                <div class="line"></div>
+                        <div className="ui placeholder">
+                            <div className="image header">
+                                <div className="line"></div>
+                                <div className="line"></div>
                             </div>
                         </div>
                     </div>
-                    <div class="image">
-                        <div class="ui placeholder">
-                            <div class="square image"></div>
+                    <div className="image">
+                        <div className="ui placeholder">
+                            <div className="square image"></div>
                         </div>
                     </div>
-                    <div class="content">
+                    <div className="content">
                         <div style={{marginBottom:'10px'}} className="ui label small">
                             <i className="tag icon"></i>
                             ...
                         </div>
-                        <div style={{marginBottom:'10px'}} class="ui placeholder">
-                            <div class="header">
-                                <div class="very short line"></div>
-                                <div class="medium line"></div>
+                        <div style={{marginBottom:'10px'}} className="ui placeholder">
+                            <div className="header">
+                                <div className="very short line"></div>
+                                <div className="medium line"></div>
                             </div>
-                            <div class="paragraph">
-                                <div class="short line"></div>
+                            <div className="paragraph">
+                                <div className="short line"></div>
                             </div>
                         </div>
                         <span className="right floated">
@@ -46,8 +46,8 @@ const PostListLoading = () => {
     
     return (
         <div>
-            <h1 class="ui header" style={{ marginBottom: '30px'}}>
-                <div class="content">
+            <h1 className="ui header" style={{ marginBottom: '30px'}}>
+                <div className="content">
                     Loading Posts...
                 </div>
             </h1>

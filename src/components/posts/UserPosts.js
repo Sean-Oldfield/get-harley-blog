@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 
-import blog from '../apis/blog';
+import blog from '../../apis/blog';
 import PostList from './PostList';
-import Pagination from './Pagination';
-import PostListLoading from './loading/PostListLoading';
+import Pagination from '../Pagination';
+import PostListLoading from './PostListLoading';
 
 const UserPosts = props => {
 
@@ -12,7 +12,7 @@ const UserPosts = props => {
     const [user, setUser] = useState(null);
     const [posts, setPosts] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
-    const [postsPerPage] = useState(8);
+    const [postsPerPage] = useState(6);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -40,9 +40,9 @@ const UserPosts = props => {
     }
     return (
         <div>
-            <h1 class="ui header" style={{ marginBottom: '30px'}}>
-                <i class="camera retro icon"></i>
-                <div class="content">
+            <h1 className="ui header" style={{ marginBottom: '30px'}}>
+                <i className="camera retro icon"></i>
+                <div className="content">
                     {user.firstName} {user.lastName}
                 </div>
             </h1>

@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-import blog from '../apis/blog';
-import Comment from './Comment';
-import CommentList from './CommentList';
-import CommentLoading from './loading/CommentLoading';
+import blog from '../../apis/blog';
+import CommentList from '../comments/CommentList';
+import CommentLoading from '../comments/CommentLoading';
 
 const Post = ({ post, setTag }) => {
 

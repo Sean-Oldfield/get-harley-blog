@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 
-import blog from '../apis/blog';
-import UsersListLoading from './loading/UsersListLoading';
-import Pagination from './Pagination';
+import blog from '../../apis/blog';
+import UsersListLoading from './UsersListLoading';
+import Pagination from '../Pagination';
 import UsersListItem from './UsersListItem';
 
 const UsersList = () => {

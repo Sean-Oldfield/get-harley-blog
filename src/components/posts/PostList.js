@@ -13,7 +13,7 @@ const PostList = ({ posts, setTag }) => {
     }
 
     return (
-        <div className="ui four stackable cards">
+        <div className="ui three stackable cards">
             {renderList()}
         </div>
     );

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './styles/Pagination.css';
+import './Pagination.css';
 
 const Pagination = ({ itemsPerPage, totalItems, paginate }) => {
 

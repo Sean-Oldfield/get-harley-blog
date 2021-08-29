@@ -2,6 +2,9 @@ import React from 'react';
 
 const Comment = ({ comment }) => {
 
+    if (!comment || !comment.owner) {
+        return <div>Oops. This comment can't be found</div>;
+    }
     return (
         <div className="comment" key={comment.id}>
             <div className="avatar">

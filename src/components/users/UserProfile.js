@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
-import blog from '../apis/blog';
-import UserProfileLoading from './loading/UserProfileLoading';
+import blog from '../../apis/blog';
+import UserProfileLoading from './UserProfileLoading';
 
 const UserProfile = props => {
     
@@ -27,7 +27,7 @@ const UserProfile = props => {
                 <img alt="user avatar" src={user.picture} />
             </div>
             <div className="content">
-                <a className="header">{user.firstName} {user.lastName}</a>
+                <div className="header">{user.firstName} {user.lastName}</div>
                 <div className="meta">
                 <span className="date">Joined {new Date(user.registerDate).toLocaleDateString()}</span>
                 </div>
