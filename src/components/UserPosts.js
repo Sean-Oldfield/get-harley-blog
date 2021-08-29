@@ -19,13 +19,8 @@ const UserPosts = props => {
         const fetchPosts = async () => {
             setLoading(true);
             const res = await blog.get(`user/${userId}/post`);
-            const tempPosts = res.data.data;
-            for (let i=0; i<tempPosts.length; i++) {
-                const res2 = await blog.get(`post/${tempPosts[i].id}/comment`);
-                tempPosts[i].comments = res2.data.data;
-            }
-            setPosts(tempPosts);
-            setUser(tempPosts[0].owner);
+            setPosts(res.data.data);
+            setUser(res.data.data[0].owner);
             setLoading(false);
         }
         fetchPosts();

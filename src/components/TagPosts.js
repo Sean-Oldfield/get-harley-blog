@@ -17,12 +17,7 @@ const TagPosts = props => {
         const fetchTagPosts = async () => {
             setLoading(true);
             const res = await blog.get(`tag/${tag}/post`, { params: { limit: '30' } });
-            const tempPosts = res.data.data;
-            for (let i=0; i<tempPosts.length; i++) {
-                const res2 = await blog.get(`post/${tempPosts[i].id}/comment`);
-                tempPosts[i].comments = res2.data.data;
-            }
-            setPosts(tempPosts);
+            setPosts(res.data.data);
             setLoading(false);
         }
         fetchTagPosts();

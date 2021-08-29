@@ -1,7 +1,25 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
+import blog from '../apis/blog';
+import Comment from './Comment';
+import CommentList from './CommentList';
+import CommentLoading from './loading/CommentLoading';
+
 const Post = ({ post, setTag }) => {
+
+    const [loading, setLoading] = useState(true);
+    const [comments, setComments] = useState([]);
+
+    useEffect(() => {
+        const fetchComments = async () => {
+            setLoading(true);
+            const res = await blog.get(`post/${post.id}/comment`);
+            setComments(res.data.data);
+            setLoading(false);
+        }
+        fetchComments();
+    }, []);
 
     const renderTags = () => {
         return post.tags.map(tag => {
@@ -18,32 +36,6 @@ const Post = ({ post, setTag }) => {
             );
         });
     } 
-
-    const renderComments = () => {
-        let commentsRendered = 0;
-        if (post.comments.length > 0) {
-            return post.comments.map(comment => {
-                if (commentsRendered < 2) {
-                    commentsRendered++;
-                    return (
-                        <div className="comment" key={comment.id}>
-                            <div className="avatar">
-                                <img alt="" src={comment.owner.picture} />
-                            </div>
-                            <div className="content">
-                                <span className="author">{comment.owner.firstName} {comment.owner.lastName}</span>
-                                <div className="text">
-                                    {comment.message}
-                                </div>
-                            </div>
-                        </div>  
-                    );
-                } else {
-                    return;
-                }
-            });
-        }
-    }
 
     return (
         <div className="ui raised card" key={post.id}>
@@ -64,11 +56,11 @@ const Post = ({ post, setTag }) => {
                 <span className="right floated">
                 <i className="heart outline like icon"></i> {post.likes}
                 </span>
-                <i className="comment icon"></i> {post.comments.length}
+                <i className="comment icon"></i> {comments.length}
             </div>
-                {post.comments.length > 0 ? <div className="extra content"><div className="ui minimal comments">
-                    {renderComments()}
-                </div></div>: null}     
+            {
+                loading ? <CommentLoading /> : comments.length > 0 ? <CommentList comments={comments} /> : null
+            }     
         </div>
     );
 }
